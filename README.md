@@ -1,17 +1,15 @@
-# salary_manager
+# 給料まとめ サポートページ
 
-A new Flutter project.
+本アプリに関するご質問・ご要望は以下をご確認ください。
 
-## Getting Started
+## アプリについて
 
-This project is a starting point for a Flutter application.
+給料まとめは、副業も本業もまとめてグラフで可視化できるアプリです。
 
-A few resources to get you started if this is your first Flutter project:
+## よくあるご質問
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Q. アプリが開かない／クラッシュする場合は？**  
+A. お手数ですが最新版にアップデートの上、改善しない場合はレビュー欄よりご連絡ください。
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# salary_manager
+**Q. お問い合わせ方法は？**  
+A. App Storeの「レビュー欄」または GitHub の Issue でご連絡ください。
