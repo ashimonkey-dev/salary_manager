@@ -42,13 +42,48 @@ class HomePage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white, // ヘッダー背景を白に
-        title: Text(
-          '${currentDate.value.year}年${currentDate.value.month}月',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-            color: Colors.black, // タイトル色を黒に
-          ),
+        centerTitle: true, // タイトルを中央に配置
+        title: Row(
+          mainAxisSize: MainAxisSize.min, // 必要最小限のサイズに
+          children: [
+            // 前月ボタン
+            IconButton(
+              icon: const Icon(Icons.chevron_left, color: Colors.black),
+              onPressed: () {
+                final currentPage = pageController.page?.round() ?? 0;
+                if (currentPage > 0) {
+                  pageController.animateToPage(
+                    currentPage - 1,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                }
+              },
+            ),
+            // 年月表示
+            Text(
+              '${currentDate.value.year}年${currentDate.value.month}月',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: Colors.black, // タイトル色を黒に
+              ),
+            ),
+            // 翌月ボタン
+            IconButton(
+              icon: const Icon(Icons.chevron_right, color: Colors.black),
+              onPressed: () {
+                final currentPage = pageController.page?.round() ?? 0;
+                if (currentPage < totalMonths - 1) {
+                  pageController.animateToPage(
+                    currentPage + 1,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                }
+              },
+            ),
+          ],
         ),
         actions: [
           IconButton(

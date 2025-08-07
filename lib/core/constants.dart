@@ -29,7 +29,7 @@ class AppConstants {
     Color(0xFF1B5E20), // Green Dark
   ];
 
-  // アイコンのプリセット（10種類）
+  // アイコンのプリセット（20種類）
   static const List<String> iconPresets = [
     'work',
     'business',
@@ -41,6 +41,16 @@ class AppConstants {
     'computer',
     'phone_android',
     'account_balance',
+    'attach_money',
+    'monetization_on',
+    'payment',
+    'credit_card',
+    'account_circle',
+    'person',
+    'engineering',
+    'construction',
+    'handyman',
+    'build',
   ];
 
   // 月の名前

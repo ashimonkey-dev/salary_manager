@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/category_provider.dart';
 import '../../core/constants.dart';
+import '../../core/utils/icon_utils.dart';
 
 class AddCategoryDialog extends HookConsumerWidget {
   const AddCategoryDialog({super.key});
@@ -12,6 +13,17 @@ class AddCategoryDialog extends HookConsumerWidget {
     final nameController = useTextEditingController();
     final selectedColorIndex = useState(0);
     final selectedIconIndex = useState(0);
+    final isFormValid = useState(false);
+
+    // テキストの変更を監視してボタンの活性化状態を更新
+    useEffect(() {
+      void updateFormValid() {
+        isFormValid.value = nameController.text.trim().isNotEmpty;
+      }
+      
+      nameController.addListener(updateFormValid);
+      return () => nameController.removeListener(updateFormValid);
+    }, [nameController]);
 
     return AlertDialog(
       title: const Text('給与種別追加'),
@@ -90,7 +102,7 @@ class AddCategoryDialog extends HookConsumerWidget {
                             : null,
                       ),
                       child: Icon(
-                        _getIconData(AppConstants.iconPresets[index]),
+                        IconUtils.getIconData(AppConstants.iconPresets[index]),
                         color: selectedIconIndex.value == index
                             ? Colors.blue
                             : Colors.grey,
@@ -109,9 +121,8 @@ class AddCategoryDialog extends HookConsumerWidget {
           child: const Text('キャンセル'),
         ),
         ElevatedButton(
-          onPressed: nameController.text.trim().isEmpty
-              ? null
-              : () async {
+          onPressed: isFormValid.value
+              ? () async {
                   await ref.read(categoryProvider.notifier).addCategory(
                         nameController.text.trim(),
                         AppConstants.colorPresets[selectedColorIndex.value].value,
@@ -124,37 +135,13 @@ class AddCategoryDialog extends HookConsumerWidget {
                       const SnackBar(content: Text('給与種別を追加しました')),
                     );
                   }
-                },
+                }
+              : null,
           child: const Text('追加'),
         ),
       ],
     );
   }
 
-  IconData _getIconData(String iconName) {
-    switch (iconName) {
-      case 'work':
-        return Icons.work;
-      case 'business':
-        return Icons.business;
-      case 'school':
-        return Icons.school;
-      case 'home':
-        return Icons.home;
-      case 'store':
-        return Icons.store;
-      case 'restaurant':
-        return Icons.restaurant;
-      case 'local_shipping':
-        return Icons.local_shipping;
-      case 'computer':
-        return Icons.computer;
-      case 'phone_android':
-        return Icons.phone_android;
-      case 'account_balance':
-        return Icons.account_balance;
-      default:
-        return Icons.help;
-    }
-  }
+
 } 
