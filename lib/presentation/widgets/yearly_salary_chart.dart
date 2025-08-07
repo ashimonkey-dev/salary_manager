@@ -50,6 +50,15 @@ class YearlySalaryChart extends HookConsumerWidget {
               0, (sum, entry) => sum + entry.amount
             );
 
+            // その年度で実際に使用されているカテゴリのみを抽出
+            final usedCategoryIds = <int>{};
+            for (final entry in salaryEntries) {
+              if (entry.year == year) {
+                usedCategoryIds.add(entry.categoryId);
+              }
+            }
+            final usedCategories = allCategories.where((cat) => usedCategoryIds.contains(cat.id)).toList();
+
             return Padding(
               padding: const EdgeInsets.only(left: 0.0, right: 8.0, top: 0, bottom: 16.0),
               child: Column(
@@ -126,8 +135,8 @@ class YearlySalaryChart extends HookConsumerWidget {
                           ),
                   ),
                   const SizedBox(height: 16),
-                  // 凡例を表示
-                  _buildLegend(allCategories),
+                  // 凡例を表示（その年度で使用されているカテゴリのみ）
+                  _buildLegend(usedCategories),
                 ],
               ),
             );

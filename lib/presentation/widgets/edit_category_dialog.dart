@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/category_provider.dart';
 import '../../core/constants.dart';
 import '../../domain/models/category.dart';
+import '../../core/utils/icon_utils.dart';
 
 class EditCategoryDialog extends HookConsumerWidget {
   final Category category;
@@ -105,7 +106,7 @@ class EditCategoryDialog extends HookConsumerWidget {
                             : null,
                       ),
                       child: Icon(
-                        _getIconData(AppConstants.iconPresets[index]),
+                        IconUtils.getIconData(AppConstants.iconPresets[index]),
                         color: selectedIconIndex.value == index
                             ? Colors.blue
                             : Colors.grey,
@@ -150,30 +151,5 @@ class EditCategoryDialog extends HookConsumerWidget {
     );
   }
 
-  IconData _getIconData(String iconName) {
-    switch (iconName) {
-      case 'work':
-        return Icons.work;
-      case 'business':
-        return Icons.business;
-      case 'school':
-        return Icons.school;
-      case 'home':
-        return Icons.home;
-      case 'store':
-        return Icons.store;
-      case 'restaurant':
-        return Icons.restaurant;
-      case 'local_shipping':
-        return Icons.local_shipping;
-      case 'computer':
-        return Icons.computer;
-      case 'phone_android':
-        return Icons.phone_android;
-      case 'account_balance':
-        return Icons.account_balance;
-      default:
-        return Icons.help;
-    }
-  }
+
 } 

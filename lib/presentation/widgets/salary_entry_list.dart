@@ -6,6 +6,7 @@ import '../providers/category_provider.dart';
 import '../providers/salary_provider.dart';
 import '../../domain/models/category.dart';
 import '../../domain/models/salary_entry.dart';
+import '../../core/utils/icon_utils.dart';
 
 class SalaryEntryList extends HookConsumerWidget {
   final int year;
@@ -59,7 +60,7 @@ class SalaryEntryList extends HookConsumerWidget {
                       leading: CircleAvatar(
                         backgroundColor: Color(category.color),
                         child: Icon(
-                          _getIconData(category.icon),
+                          IconUtils.getIconData(category.icon),
                           color: Colors.white,
                         ),
                       ),
@@ -90,32 +91,7 @@ class SalaryEntryList extends HookConsumerWidget {
     );
   }
 
-  IconData _getIconData(String iconName) {
-    switch (iconName) {
-      case 'work':
-        return Icons.work;
-      case 'business':
-        return Icons.business;
-      case 'school':
-        return Icons.school;
-      case 'home':
-        return Icons.home;
-      case 'store':
-        return Icons.store;
-      case 'restaurant':
-        return Icons.restaurant;
-      case 'local_shipping':
-        return Icons.local_shipping;
-      case 'computer':
-        return Icons.computer;
-      case 'phone_android':
-        return Icons.phone_android;
-      case 'account_balance':
-        return Icons.account_balance;
-      default:
-        return Icons.help;
-    }
-  }
+
 
   void _showDetailDialog(
     BuildContext context,
@@ -132,7 +108,7 @@ class SalaryEntryList extends HookConsumerWidget {
             CircleAvatar(
               backgroundColor: Color(category.color),
               child: Icon(
-                _getIconData(category.icon),
+                IconUtils.getIconData(category.icon),
                 color: Colors.white,
               ),
             ),

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../providers/category_provider.dart';
 import '../providers/salary_provider.dart';
 import '../../domain/models/category.dart';
+import '../../core/utils/icon_utils.dart';
 
 class AddSalaryPage extends HookConsumerWidget {
   final int year;
@@ -98,7 +99,7 @@ class AddSalaryPage extends HookConsumerWidget {
                                       radius: 12,
                                       backgroundColor: Color(category.color),
                                       child: Icon(
-                                        _getIconData(category.icon),
+                                        IconUtils.getIconData(category.icon),
                                         size: 16,
                                         color: Colors.white,
                                       ),
@@ -125,7 +126,7 @@ class AddSalaryPage extends HookConsumerWidget {
                                       radius: 12,
                                       backgroundColor: Color(category.color),
                                       child: Icon(
-                                        _getIconData(category.icon),
+                                        IconUtils.getIconData(category.icon),
                                         size: 16,
                                         color: Colors.white,
                                       ),
@@ -249,30 +250,5 @@ class AddSalaryPage extends HookConsumerWidget {
     );
   }
 
-  IconData _getIconData(String iconName) {
-    switch (iconName) {
-      case 'work':
-        return Icons.work;
-      case 'business':
-        return Icons.business;
-      case 'school':
-        return Icons.school;
-      case 'home':
-        return Icons.home;
-      case 'store':
-        return Icons.store;
-      case 'restaurant':
-        return Icons.restaurant;
-      case 'local_shipping':
-        return Icons.local_shipping;
-      case 'computer':
-        return Icons.computer;
-      case 'phone_android':
-        return Icons.phone_android;
-      case 'account_balance':
-        return Icons.account_balance;
-      default:
-        return Icons.help;
-    }
-  }
+
 }

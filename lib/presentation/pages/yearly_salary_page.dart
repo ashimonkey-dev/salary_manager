@@ -34,13 +34,48 @@ class YearlySalaryPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white, // ヘッダー背景を白に
-        title: Text(
-          '${currentYear.value}年',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-            color: Colors.black, // タイトル色を黒に
-          ),
+        centerTitle: true, // タイトルを中央に配置
+        title: Row(
+          mainAxisSize: MainAxisSize.min, // 必要最小限のサイズに
+          children: [
+            // 前年ボタン
+            IconButton(
+              icon: const Icon(Icons.chevron_left, color: Colors.black),
+              onPressed: () {
+                final currentPage = pageController.page?.round() ?? currentYearIndex;
+                if (currentPage > 0) {
+                  pageController.animateToPage(
+                    currentPage - 1,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                }
+              },
+            ),
+            // 年表示
+            Text(
+              '${currentYear.value}年',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: Colors.black, // タイトル色を黒に
+              ),
+            ),
+            // 翌年ボタン
+            IconButton(
+              icon: const Icon(Icons.chevron_right, color: Colors.black),
+              onPressed: () {
+                final currentPage = pageController.page?.round() ?? currentYearIndex;
+                if (currentPage < totalYears - 1) {
+                  pageController.animateToPage(
+                    currentPage + 1,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                }
+              },
+            ),
+          ],
         ),
       ),
       body: PageView.builder(
